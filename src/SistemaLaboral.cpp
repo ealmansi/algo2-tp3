@@ -1,5 +1,8 @@
 #include "../include/SistemaLaboral.h"
 
+#define 	MIN(a,b)	(((a) < (b))?((a)):((b)))
+#define 	MAX(a,b)	(((a) < (b))?((a)):((b)))
+
 SistemaLaboral::SistemaLaboral(){
 
 }
@@ -45,8 +48,8 @@ void SistemaLaboral::aliarGremios(const Nat idGr1, const Nat idGr2){
 	Nat idGrupo2 = sl[idGr2].obtenerIdGrupo();
 
 	if(idGrupo1!=idGrupo2){
-		Nat idMenor = min(idGrupo1, idGrupo2);
-		Nat idMayor = max(idGrupo1, idGrupo2);
+		Nat idMenor = MIN(idGrupo1, idGrupo2);
+		Nat idMayor = MAX(idGrupo1, idGrupo2);
 		Nat indice=0;
 		while(indice<sl.Longitud()){
 			Nat idGrupoActual = sl[indice].obtenerIdGrupo();

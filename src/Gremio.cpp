@@ -13,7 +13,7 @@ void Gremio::guardarCantAfiliados(Nat cantidadAfiliados){
 	this->cantAfiliados=cantidadAfiliados;
 }
 
-void Gremio::guardarEmpresas(Conj<string>& empresas){
+void Gremio::guardarEmpresas(Conj<String>& empresas){
 	this->empresas=empresas;
 }
 

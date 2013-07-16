@@ -1,12 +1,10 @@
 #ifndef TIPOS_H_
 #define TIPOS_H_
 
-#include <string>
+#include "../lib/aed2.h"
 
-using namespace std;
-
-typedef string Empresa;
-typedef string NombreGremio;
-typedef string Persona;
+typedef String Empresa;
+typedef String NombreGremio;
+typedef String Persona;
 
 #endif /* TIPOS_H_ */
