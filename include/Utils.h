@@ -1,14 +1,9 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include "../lib/aed2.h"
+#include <iostream>
+#include <cstdlib>
 
-using namespace std;
-using namespace aed2;
-
-#include<string>
-
-typedef string empresa;
-typedef unsigned int nat;
+#define		TERMINAR_CON_ERROR(msj)		{ std::cerr << "Error en la función " << __FUNCTION__ << " | " << (msj) << std::endl; std::exit(-1); }
 
 #endif /* UTILS_H */
