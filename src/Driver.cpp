@@ -9,7 +9,7 @@
 
 Driver::Driver()
 {
-    sistema = NULL;
+    sistema = new SistemaLaboral();
     temporada = NULL;
 }
 
@@ -24,9 +24,6 @@ Driver::~Driver()
 
 void Driver::agregarGremio(const NombreGremio &g, Nat cantAfiliados)
 {
-    if (sistema == NULL)
-        sistema = new SistemaLaboral();
-
     if (puenteNombreId.Definido(g))
         TERMINAR_CON_ERROR(GREMIO_YA_EXISTE(g));
 

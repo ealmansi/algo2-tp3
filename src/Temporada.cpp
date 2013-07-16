@@ -8,24 +8,18 @@ Temporada::Temporada(SistemaLaboral &sl): sistema(sl)
 
 void Temporada::inicializarAcuerdosPorGrupos()
 {
-    Nat indice = 0;
     Nat cantGrupos = this->sistema.obtenerCantidadGrupos();
-    while (indice < cantGrupos)
-    {
+
+    for (Nat indice = 0; indice < cantGrupos; indice++)
         this->acuerdosPorGrupo.AgregarAtras(Lista<Acuerdo>());
-        indice++;
-    }
 }
 
 void Temporada::inicializarCantAcuerdosPrevios()
 {
-    Nat indice = 0;
-    Nat cantGrupos = this->sistema.obtenerGremios().Cardinal();
-    while (indice < cantGrupos)
-    {
+    Nat cantGremios = this->sistema.obtenerGremios().Cardinal();
+
+    for (Nat indice = 0; indice < cantGremios; indice++)
         this->cantAcuerdosPrevios.AgregarAtras(0);
-        indice++;
-    }
 }
 
 Conj<Gremio> Temporada::gremios() const
@@ -41,9 +35,8 @@ const Conj<Paritaria> &Temporada::obtenerParitariasAbiertas() const
 void Temporada::abrirParitaria(const Gremio gr, const Nat piso, const Nat techo, const Conj<Empresa> es)
 {
     if (obtenerCantAcuerdosPrevios(gr) > 0)
-    {
         removerAcuerdo(gr);
-    }
+
     agregarParitaria(Paritaria(gr, piso, techo));
 }
 
@@ -97,6 +90,7 @@ bool Temporada::enParitarias(const Gremio gr) const
         it.Avanzar();
         pa = it.Siguiente();
     }
+
     return it.HaySiguiente();
 }
 
@@ -111,6 +105,7 @@ Conj<Gremio> Temporada::gremiosNegociando() const
         res.AgregarRapido(pa.obtenerGremio());
         it.Avanzar();
     }
+
     return res;
 }
 
@@ -130,6 +125,7 @@ Conj<Empresa> Temporada::empresasNegociando() const
         }
         it.Avanzar();
     }
+
     return res;
 }
 
@@ -144,6 +140,7 @@ Nat Temporada::trabajadoresNegociando() const
         res += cantAfiliadosParitaria;
         it.Avanzar();
     }
+
     return res;
 }
 
@@ -212,6 +209,7 @@ Paritaria &Temporada::removerAcuerdo(const Gremio &gr)
     }
     Paritaria &res = it.Siguiente().obtenerParitaria();
     it.EliminarSiguiente();
+    
     return res;
 }
 
