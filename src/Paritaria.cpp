@@ -1,4 +1,4 @@
-#include "../interfaces/Paritaria.h"
+#include "../include/Paritaria.h"
 
 Paritaria::Paritaria(const Gremio& gr, const nat piso, const nat tope):gremio(gr),piso(piso),tope(tope) {
 

@@ -1,4 +1,4 @@
-#include "../interfaces/Paritaria.h"
+#include "Paritaria.h"
 #ifndef ACUERDO_H_
 #define ACUERDO_H_
 

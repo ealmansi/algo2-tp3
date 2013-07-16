@@ -1,4 +1,4 @@
-#include "../interfaces/Temporada.h"
+#include "../include/Temporada.h"
 
 Temporada::Temporada(SistemaLaboral& sl):sistema(sl){
 	inicializarAcuerdosPorGrupos();

@@ -4,12 +4,12 @@
 #include <stdlib.h>
 
 // adaptar a los archivos que correspondan
-#include "aed2.h"
+#include "../lib/aed2.h"
 #include "Tipos.h"
 
 // Modulos del tp de la catedra
-#include "../interfaces/SistemaLaboral.h"
-#include "../interfaces/Temporada.h"
+#include "SistemaLaboral.h"
+#include "Temporada.h"
 
 using namespace std;
 

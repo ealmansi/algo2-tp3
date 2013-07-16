@@ -1,4 +1,4 @@
-#include "../interfaces/Gremio.h"
+#include "Gremio.h"
 #ifndef PARITARIA_H_
 #define PARITARIA_H_
 

@@ -1,6 +1,6 @@
-#include "../interfaces/SistemaLaboral.h"
-#include "../interfaces/Paritaria.h"
-#include "../interfaces/Acuerdo.h"
+#include "SistemaLaboral.h"
+#include "Paritaria.h"
+#include "Acuerdo.h"
 #ifndef TEMPORADA_H_
 #define TEMPORADA_H_
 

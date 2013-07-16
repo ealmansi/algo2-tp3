@@ -1,4 +1,4 @@
-#include "../interfaces/SistemaLaboral.h"
+#include "../include/SistemaLaboral.h"
 
 SistemaLaboral::SistemaLaboral(){
 

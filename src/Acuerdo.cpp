@@ -1,4 +1,4 @@
-#include "../interfaces/Acuerdo.h"
+#include "../include/Acuerdo.h"
 
 Acuerdo::Acuerdo(const Paritaria& pa, const nat porcentaje, const nat cantAcuerdosPrevios):paritaria(pa), cantAcuerdosPrevios(cantAcuerdosPrevios), porcentaje(porcentaje){
 

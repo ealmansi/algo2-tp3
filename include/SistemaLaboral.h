@@ -1,7 +1,8 @@
-#include "../interfaces/Gremio.h"
-#include "../aed2-kit/Tipos.h"
 #ifndef SISTEMALABORAL_H_
 #define SISTEMALABORAL_H_
+
+#include "Gremio.h"
+#include "Tipos.h"
 
 class SistemaLaboral {
 public:

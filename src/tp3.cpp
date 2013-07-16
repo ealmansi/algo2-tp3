@@ -1,5 +1,5 @@
-#include "Driver.h"
-#include "aed2_tests.h"
+#include "../include/Driver.h"
+#include "../include/aed2_tests.h"
 
 // Auxiliares de testeo
 
