@@ -1,0 +1,4 @@
+const sobre el metodo cuando devuelvo object&
+que pasa si tengo que devolver un set<algo> por copia ? Si declaro en stack, lo que devuelvo es basura
+y si hago * y new lo que devuelvo queda sin liberarse.
+ver TODO's y SL y Temporada
