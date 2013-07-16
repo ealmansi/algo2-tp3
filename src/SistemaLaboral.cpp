@@ -4,16 +4,16 @@ SistemaLaboral::SistemaLaboral(){
 
 }
 
-void SistemaLaboral::agregarEmpresa(const nat &idG, const Empresa &e){
+void SistemaLaboral::agregarEmpresa(const Nat &idG, const Empresa &e){
 	this->sl[idG].agregarEmpresa(e);
 }
 
-nat SistemaLaboral::agregarGremio(const Conj<empresa>& es, const nat cantAfiliados){
+Nat SistemaLaboral::agregarGremio(const Conj<Empresa>& es, const Nat cantAfiliados){
 	//idgrupo fixes
 	//+1 fix
 	//gremios vacios fix
-	nat idGremio=sl.Longitud();//siempre es uno mas que el ultimo, ok.
-	nat idGrupo=maximoIdGrupo();
+	Nat idGremio=sl.Longitud();//siempre es uno mas que el ultimo, ok.
+	Nat idGrupo=maximoIdGrupo();
 	if(idGremio==0){
 		//sl esta vacio...
 		//entonces el idGrupo tambien es 0...porque arrancan a numerarse asi.
@@ -32,24 +32,24 @@ nat SistemaLaboral::agregarGremio(const Conj<empresa>& es, const nat cantAfiliad
 	return idGremio;
 }
 
-Conj<empresa>& SistemaLaboral::obtenerEmpresas(const nat &idG){
+Conj<Empresa>& SistemaLaboral::obtenerEmpresas(const Nat &idG){
 	return this->sl[idG].obtenerEmpresas();
 }
 
-Gremio SistemaLaboral::obtenerGremio(nat idG){
+Gremio SistemaLaboral::obtenerGremio(Nat idG){
 	return this->sl[idG];
 }
 
-void SistemaLaboral::aliarGremios(const nat idGr1, const nat idGr2){
-	nat idGrupo1 = sl[idGr1].obtenerIdGrupo();
-	nat idGrupo2 = sl[idGr2].obtenerIdGrupo();
+void SistemaLaboral::aliarGremios(const Nat idGr1, const Nat idGr2){
+	Nat idGrupo1 = sl[idGr1].obtenerIdGrupo();
+	Nat idGrupo2 = sl[idGr2].obtenerIdGrupo();
 
 	if(idGrupo1!=idGrupo2){
-		nat idMenor = min(idGrupo1, idGrupo2);
-		nat idMayor = max(idGrupo1, idGrupo2);
-		nat indice=0;
+		Nat idMenor = min(idGrupo1, idGrupo2);
+		Nat idMayor = max(idGrupo1, idGrupo2);
+		Nat indice=0;
 		while(indice<sl.Longitud()){
-			nat idGrupoActual = sl[indice].obtenerIdGrupo();
+			Nat idGrupoActual = sl[indice].obtenerIdGrupo();
 			if(idMayor == idGrupoActual){
 				sl[indice].guardarIdGrupo(idMenor);
 			}else{
@@ -64,17 +64,17 @@ void SistemaLaboral::aliarGremios(const nat idGr1, const nat idGr2){
 
 Conj<Gremio> SistemaLaboral::obtenerGremios() const{
 	Conj<Gremio> result;
-	for(nat i=0;i<sl.Longitud();i++){
+	for(Nat i=0;i<sl.Longitud();i++){
 		result.AgregarRapido(sl[i]);
 	}
 	return result;
 }
 
-Conj<nat> SistemaLaboral::obtenerAliados(const nat idGremio) const{
+Conj<Nat> SistemaLaboral::obtenerAliados(const Nat idGremio) const{
 	// condicion de while a if fix
-	Conj<nat> result;
-	nat indice=0;
-	nat idGrupoTarget=sl[idGremio].obtenerIdGrupo();
+	Conj<Nat> result;
+	Nat indice=0;
+	Nat idGrupoTarget=sl[idGremio].obtenerIdGrupo();
 	while(indice < sl.Longitud()){
 		if((indice!=idGremio) && (sl[indice].obtenerIdGrupo()==idGrupoTarget)){
 			result.AgregarRapido(indice);
@@ -84,15 +84,15 @@ Conj<nat> SistemaLaboral::obtenerAliados(const nat idGremio) const{
 	return result;
 }
 
-nat SistemaLaboral::obtenerCantidadGrupos() const{
+Nat SistemaLaboral::obtenerCantidadGrupos() const{
 	//* gremios vacios fix
 	//* plus one fix.
 	return (sl.Longitud()>0)? this->maximoIdGrupo() + 1 : 0;
 }
 
-nat SistemaLaboral::maximoIdGrupo() const {
-	nat max=0;
-	for(nat j=0; j<sl.Longitud(); j++)
+Nat SistemaLaboral::maximoIdGrupo() const {
+	Nat max=0;
+	for(Nat j=0; j<sl.Longitud(); j++)
 	{
 	    if(max<sl[j].obtenerIdGrupo()){
 	    	max=sl[j].obtenerIdGrupo();

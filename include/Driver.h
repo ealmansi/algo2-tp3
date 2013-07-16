@@ -75,8 +75,8 @@ private:
 
     SistemaLaboral * sistema;
     Temporada * temporada;
-    Dicc<NombreGremio, nat> puenteNombreId;
-    Dicc<nat, NombreGremio> puenteIdNombre;
+    Dicc<NombreGremio, Nat> puenteNombreId;
+    Dicc<Nat, NombreGremio> puenteIdNombre;
 
 };
 

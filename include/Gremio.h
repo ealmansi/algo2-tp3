@@ -1,30 +1,32 @@
-#include "Utils.h"
 #ifndef GREMIO_H_
 #define GREMIO_H_
+
+#include "Tipos.h"
+#include "../lib/aed2.h"
 
 class Gremio {
 	public:
 		Gremio();
-		Gremio(const Conj<empresa>& es, const nat cantidadAfiliados);
+		Gremio(const Conj<Empresa>& es, const Nat cantidadAfiliados);
 		Gremio(const Gremio& otro);
-		Conj<empresa>& obtenerEmpresas();
-		nat obtenerCantAfiliados() const;
-		nat obtenerIdGremio() const;
-		nat obtenerIdGrupo() const;
-		void guardarIdGremio(const nat nuevoId);
-		void guardarIdGrupo(const nat nuevoId);
-		void guardarCantAfiliados(nat cantidadAfiliados);
-		void guardarEmpresas(Conj<string>& empresa);
+		Conj<Empresa>& obtenerEmpresas();
+		Nat obtenerCantAfiliados() const;
+		Nat obtenerIdGremio() const;
+		Nat obtenerIdGrupo() const;
+		void guardarIdGremio(const Nat nuevoId);
+		void guardarIdGrupo(const Nat nuevoId);
+		void guardarCantAfiliados(Nat cantidadAfiliados);
+		void guardarEmpresas(Conj<String>& empresas);
 		~Gremio();
 		bool operator !=(const Gremio &p) const;
 
 		//agregados por driver
-		void agregarEmpresa(const empresa &e);
+		void agregarEmpresa(const Empresa &e);
 	private:
-		Conj<string> empresas;
-		nat cantAfiliados;
-		nat idGremio;
-		nat idGrupo;
+		Conj<String> empresas;
+		Nat cantAfiliados;
+		Nat idGremio;
+		Nat idGrupo;
 };
 
 #endif /* GREMIO_H_ */

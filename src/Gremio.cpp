@@ -9,7 +9,7 @@ bool Gremio::operator != (const Gremio &p) const
     return this->idGremio!=p.idGremio;
 }
 
-void Gremio::guardarCantAfiliados(nat cantidadAfiliados){
+void Gremio::guardarCantAfiliados(Nat cantidadAfiliados){
 	this->cantAfiliados=cantidadAfiliados;
 }
 
@@ -17,15 +17,15 @@ void Gremio::guardarEmpresas(Conj<string>& empresas){
 	this->empresas=empresas;
 }
 
-void Gremio::agregarEmpresa(const empresa &e){
+void Gremio::agregarEmpresa(const Empresa &e){
 	this->empresas.Agregar(e);
 }
 
-Gremio::Gremio(const Conj<empresa>& es, const nat cantidadAfiliados):empresas(es), cantAfiliados(cantidadAfiliados), idGremio(0), idGrupo(0) {
+Gremio::Gremio(const Conj<Empresa>& es, const Nat cantidadAfiliados):empresas(es), cantAfiliados(cantidadAfiliados), idGremio(0), idGrupo(0) {
 
 }
 
-Conj<empresa>& Gremio::obtenerEmpresas(){
+Conj<Empresa>& Gremio::obtenerEmpresas(){
 	return this->empresas;
 }
 
@@ -33,23 +33,23 @@ Gremio::Gremio(const Gremio& otro): empresas(otro.empresas), cantAfiliados(otro.
 
 }
 
-nat Gremio::obtenerCantAfiliados() const{
+Nat Gremio::obtenerCantAfiliados() const{
 	return this->cantAfiliados;
 }
 
-nat Gremio::obtenerIdGremio() const{
+Nat Gremio::obtenerIdGremio() const{
 	return this->idGremio;
 }
 
-nat Gremio::obtenerIdGrupo() const{
+Nat Gremio::obtenerIdGrupo() const{
 	return this->idGrupo;
 }
 
-void Gremio::guardarIdGremio(const nat nuevoId){
+void Gremio::guardarIdGremio(const Nat nuevoId){
 	this->idGremio=nuevoId;
 }
 
-void Gremio::guardarIdGrupo(const nat nuevoId){
+void Gremio::guardarIdGrupo(const Nat nuevoId){
 	this->idGrupo=nuevoId;
 }
 

@@ -1,6 +1,6 @@
 #include "../include/Acuerdo.h"
 
-Acuerdo::Acuerdo(const Paritaria& pa, const nat porcentaje, const nat cantAcuerdosPrevios):paritaria(pa), cantAcuerdosPrevios(cantAcuerdosPrevios), porcentaje(porcentaje){
+Acuerdo::Acuerdo(const Paritaria& pa, const Nat porcentaje, const Nat cantAcuerdosPrevios):paritaria(pa), cantAcuerdosPrevios(cantAcuerdosPrevios), porcentaje(porcentaje){
 
 }
 
@@ -16,11 +16,11 @@ Gremio& Acuerdo::obtenerGremio(){
 	return (this->paritaria).obtenerGremio();
 }
 
-nat Acuerdo::obtenerPorcentaje() const{
+Nat Acuerdo::obtenerPorcentaje() const{
 	return this->porcentaje;
 }
 
-nat Acuerdo::obtenerCantAcuerdosPrevios() const{
+Nat Acuerdo::obtenerCantAcuerdosPrevios() const{
 	return this->cantAcuerdosPrevios;
 }
 

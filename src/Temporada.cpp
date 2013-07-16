@@ -6,8 +6,8 @@ Temporada::Temporada(SistemaLaboral& sl):sistema(sl){
 }
 
 void Temporada::inicializarAcuerdosPorGrupos(){
-	nat indice=0;
-	nat cantGrupos = this->sistema.obtenerCantidadGrupos();
+	Nat indice=0;
+	Nat cantGrupos = this->sistema.obtenerCantidadGrupos();
 	while(indice<cantGrupos){
 		this->acuerdosPorGrupo.AgregarAtras(Lista<Acuerdo>());
 		indice++;
@@ -15,8 +15,8 @@ void Temporada::inicializarAcuerdosPorGrupos(){
 }
 
 void Temporada::inicializarCantAcuerdosPrevios(){
-	nat indice=0;
-	nat cantGrupos = this->sistema.obtenerGremios().Cardinal();
+	Nat indice=0;
+	Nat cantGrupos = this->sistema.obtenerGremios().Cardinal();
 	while(indice<cantGrupos){
 		this->cantAcuerdosPrevios.AgregarAtras(0);
 		indice++;
@@ -31,14 +31,14 @@ const Conj<Paritaria>& Temporada::obtenerParitariasAbiertas() const{
 	return this->paritariasAbiertas;
 }
 
-void Temporada::abrirParitaria(const Gremio gr, const nat piso, const nat techo, const Conj<empresa> es){
+void Temporada::abrirParitaria(const Gremio gr, const Nat piso, const Nat techo, const Conj<Empresa> es){
 	if(obtenerCantAcuerdosPrevios(gr)>0){
 		removerAcuerdo(gr);
 	}
 	agregarParitaria(Paritaria(gr, piso, techo));
 }
 
-void Temporada::cerrarAcuerdo(const Gremio gr, const nat porcentaje){
+void Temporada::cerrarAcuerdo(const Gremio gr, const Nat porcentaje){
 	Lista<Acuerdo>::Iterador it = obtenerAcuerdosDeAliados(gr).CrearIt();
 	while( (it.HaySiguiente()) && (it.Siguiente().obtenerPorcentaje()<porcentaje) ){
 		agregarParitaria(it.Siguiente().obtenerParitaria());
@@ -53,8 +53,8 @@ void Temporada::cerrarAcuerdo(const Gremio gr, const nat porcentaje){
 	it.AgregarComoSiguiente(Acuerdo(pa, porcentaje, obtenerCantAcuerdosPrevios(gr)));
 }
 
-nat Temporada::obtenerCantAcuerdosPrevios(const Gremio& gr) const{
-	nat idGremio = gr.obtenerIdGremio();
+Nat Temporada::obtenerCantAcuerdosPrevios(const Gremio& gr) const{
+	Nat idGremio = gr.obtenerIdGremio();
 	return this->cantAcuerdosPrevios[idGremio];
 }
 
@@ -68,7 +68,7 @@ void Temporada::agregarParitaria(Paritaria pa){
 }
 
 Lista<Acuerdo>& Temporada::obtenerAcuerdosDeAliados(const Gremio& gr){
-	nat idGrupo = gr.obtenerIdGrupo();
+	Nat idGrupo = gr.obtenerIdGrupo();
 	return this->acuerdosPorGrupo[idGrupo];
 }
 
@@ -94,13 +94,13 @@ Conj<Gremio> Temporada::gremiosNegociando() const{
 	return res;
 }
 
-Conj<empresa> Temporada::empresasNegociando() const{
-	Conj<empresa> res;
+Conj<Empresa> Temporada::empresasNegociando() const{
+	Conj<Empresa> res;
 	Conj<Paritaria>::const_Iterador it = this->paritariasAbiertas.CrearIt();
 	while(it.HaySiguiente()){
 		Paritaria pa = it.Siguiente();
-		Conj<empresa> empresasParitaria = pa.obtenerGremio().obtenerEmpresas();
-		Conj<empresa>::const_Iterador itEmpresas = empresasParitaria.CrearIt();
+		Conj<Empresa> empresasParitaria = pa.obtenerGremio().obtenerEmpresas();
+		Conj<Empresa>::const_Iterador itEmpresas = empresasParitaria.CrearIt();
 		while(itEmpresas.HaySiguiente()){
 			res.AgregarRapido(itEmpresas.Siguiente());
 			itEmpresas.Avanzar();
@@ -110,12 +110,12 @@ Conj<empresa> Temporada::empresasNegociando() const{
 	return res;
 }
 
-nat Temporada::trabajadoresNegociando() const{
-	nat res=0;
+Nat Temporada::trabajadoresNegociando() const{
+	Nat res=0;
 	Conj<Paritaria>::const_Iterador it = this->paritariasAbiertas.CrearIt();
 	while(it.HaySiguiente()){
 		Paritaria pa = it.Siguiente();
-		nat cantAfiliadosParitaria = pa.obtenerGremio().obtenerCantAfiliados();
+		Nat cantAfiliadosParitaria = pa.obtenerGremio().obtenerCantAfiliados();
 		res+=cantAfiliadosParitaria;
 		it.Avanzar();
 	}
@@ -144,11 +144,11 @@ void Temporada::removerParitaria(const Gremio& gr, Paritaria& res){
 void Temporada::gremioConflictivo(Gremio& gremioConflictivo) const{
 	Conj<Gremio>::const_Iterador itGremios = this->gremios().CrearIt();
 	gremioConflictivo = itGremios.Siguiente();
-	nat mCantAcuerdosPrevios = obtenerCantAcuerdosPrevios(gremioConflictivo);
+	Nat mCantAcuerdosPrevios = obtenerCantAcuerdosPrevios(gremioConflictivo);
 	itGremios.Avanzar();
 
 	while(itGremios.HaySiguiente()){
-		nat cantAcuerdosPrevios = obtenerCantAcuerdosPrevios(itGremios.Siguiente());
+		Nat cantAcuerdosPrevios = obtenerCantAcuerdosPrevios(itGremios.Siguiente());
 		if(mCantAcuerdosPrevios<cantAcuerdosPrevios){
 			mCantAcuerdosPrevios=cantAcuerdosPrevios;
 			gremioConflictivo=itGremios.Siguiente();
@@ -157,9 +157,9 @@ void Temporada::gremioConflictivo(Gremio& gremioConflictivo) const{
 	}
 }
 
-Conj<nat> Temporada::obtenerGremiosConAcuerdos() const{
-	Conj<nat> res;
-	for(nat j=0;j<this->acuerdosPorGrupo.Longitud();j++){
+Conj<Nat> Temporada::obtenerGremiosConAcuerdos() const{
+	Conj<Nat> res;
+	for(Nat j=0;j<this->acuerdosPorGrupo.Longitud();j++){
 		Lista<Acuerdo>::const_Iterador acuerdosDeGrupo = this->acuerdosPorGrupo[j].CrearIt();
 		while(acuerdosDeGrupo.HaySiguiente()){
 			Acuerdo ac = acuerdosDeGrupo.Siguiente();

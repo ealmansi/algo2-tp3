@@ -26,8 +26,8 @@ void Driver::agregarGremio(const NombreGremio &g, Nat cantAfiliados)
     if(puenteNombreId.Definido(g)){
     	cerr << "Ya existe este gremio en el sistema" << endl;
     }else{
-		Conj<empresa> empresas;//dummy conj
-		nat idG = sistema->agregarGremio(empresas, cantAfiliados);
+		Conj<Empresa> empresas;//dummy conj
+		Nat idG = sistema->agregarGremio(empresas, cantAfiliados);
 		puenteNombreId.Definir(g, idG);
 		puenteIdNombre.Definir(idG, g);
     }
@@ -36,8 +36,8 @@ void Driver::agregarGremio(const NombreGremio &g, Nat cantAfiliados)
 void Driver::aliar(const NombreGremio &g1, const NombreGremio &g2)
 {
 	if(puenteNombreId.Definido(g1) && puenteNombreId.Definido(g2)){
-		nat idG1 = puenteNombreId.Significado(g1);
-		nat idG2 = puenteNombreId.Significado(g2);
+		Nat idG1 = puenteNombreId.Significado(g1);
+		Nat idG2 = puenteNombreId.Significado(g2);
 		sistema->aliarGremios(idG1, idG2);
 	}else{
 		cerr << "No existe alguno o ambos de estos nombres" << endl;
@@ -47,7 +47,7 @@ void Driver::aliar(const NombreGremio &g1, const NombreGremio &g2)
 void Driver::agregarEmpresa(const NombreGremio &g, const Empresa &e)
 {
 	if(puenteNombreId.Definido(g)){
-		nat idG = puenteNombreId.Significado(g);
+		Nat idG = puenteNombreId.Significado(g);
 		sistema->agregarEmpresa(idG, e);
 	}else{
 		cerr << "No existe el nombre de gremio" << endl;
@@ -57,9 +57,9 @@ void Driver::agregarEmpresa(const NombreGremio &g, const Empresa &e)
 Conj<Empresa> Driver::empresas(const NombreGremio &g) const
 {
 	if(puenteNombreId.Definido(g)){
-		nat idG = puenteNombreId.Significado(g);
+		Nat idG = puenteNombreId.Significado(g);
 		Conj<Empresa> ret;
-		    Conj<empresa>::Iterador it = sistema->obtenerEmpresas(idG).CrearIt();
+		    Conj<Empresa>::Iterador it = sistema->obtenerEmpresas(idG).CrearIt();
 		    while (it.HaySiguiente()) {
 		        ret.Agregar(it.Siguiente());
 		        it.Avanzar();
@@ -75,10 +75,10 @@ Conj<NombreGremio> Driver::aliados(const NombreGremio &g) const
 {
 	Conj<NombreGremio> ret;
 	if(puenteNombreId.Definido(g)){
-		nat idG = puenteNombreId.Significado(g);
-		Conj<nat> aliados = sistema->obtenerAliados(idG);
+		Nat idG = puenteNombreId.Significado(g);
+		Conj<Nat> aliados = sistema->obtenerAliados(idG);
 		//cout << "aliados de " << idG << aliados << endl;
-		Conj<nat>::Iterador it = aliados.CrearIt();
+		Conj<Nat>::Iterador it = aliados.CrearIt();
 		while (it.HaySiguiente()) {
 			ret.Agregar(puenteIdNombre.Significado(it.Siguiente()));
 			it.Avanzar();
@@ -99,7 +99,7 @@ void Driver::iniciar()
 void Driver::abrirParitaria(const NombreGremio &g, Nat piso, Nat tope)
 {
 	if(puenteNombreId.Definido(g)){
-		nat idG = puenteNombreId.Significado(g);
+		Nat idG = puenteNombreId.Significado(g);
 		Gremio gremio = sistema->obtenerGremio(idG);
 		temporada->abrirParitaria(gremio, piso, tope, gremio.obtenerEmpresas());
 	}else{
@@ -110,7 +110,7 @@ void Driver::abrirParitaria(const NombreGremio &g, Nat piso, Nat tope)
 void Driver::cerrarAcuerdo(const NombreGremio &g, Nat valor)
 {
 	if(puenteNombreId.Definido(g)){
-		nat idG = puenteNombreId.Significado(g);
+		Nat idG = puenteNombreId.Significado(g);
 		Gremio gremio = sistema->obtenerGremio(idG);
 		temporada->cerrarAcuerdo(gremio, valor);
 	}else{
@@ -134,8 +134,8 @@ Conj<NombreGremio> Driver::paritarias() const
 Conj<NombreGremio> Driver::acuerdos() const
 {
 	Conj<NombreGremio> res;
-	Conj<nat> conj = temporada->obtenerGremiosConAcuerdos();
-	Conj<nat>::Iterador acuerdos = conj.CrearIt();
+	Conj<Nat> conj = temporada->obtenerGremiosConAcuerdos();
+	Conj<Nat>::Iterador acuerdos = conj.CrearIt();
 	while(acuerdos.HaySiguiente()){
 		res.AgregarRapido(puenteIdNombre.Significado(acuerdos.Siguiente()));
 		acuerdos.Avanzar();
@@ -146,7 +146,7 @@ Conj<NombreGremio> Driver::acuerdos() const
 Nat Driver::piso(const NombreGremio & g) const
 {
 	if(puenteNombreId.Definido(g)){
-		nat idG = puenteNombreId.Significado(g);
+		Nat idG = puenteNombreId.Significado(g);
 		Conj<Paritaria>::const_Iterador it = temporada->obtenerParitariasAbiertas().CrearIt();
 		Paritaria pa = it.Siguiente();
 		while (pa.obtenerGremio().obtenerIdGremio() != idG){
@@ -162,7 +162,7 @@ Nat Driver::piso(const NombreGremio & g) const
 Nat Driver::tope(const NombreGremio& g) const
 {
 	if(puenteNombreId.Definido(g)){
-		nat idG = puenteNombreId.Significado(g);
+		Nat idG = puenteNombreId.Significado(g);
 		Conj<Paritaria>::const_Iterador it = temporada->obtenerParitariasAbiertas().CrearIt();
 		Paritaria pa = it.Siguiente();
 		while (pa.obtenerGremio().obtenerIdGremio() != idG){
@@ -178,7 +178,7 @@ Nat Driver::tope(const NombreGremio& g) const
 Nat Driver::valor(const NombreGremio &g) const
 {
 	if(puenteNombreId.Definido(g)){
-		nat idG = puenteNombreId.Significado(g);
+		Nat idG = puenteNombreId.Significado(g);
 		Gremio gremio = sistema->obtenerGremio(idG);
 		Lista<Acuerdo>::Iterador it = temporada->obtenerAcuerdosDeAliados(gremio).CrearIt();
 			while (it.Siguiente().obtenerGremio().obtenerIdGrupo()!= idG){
@@ -194,7 +194,7 @@ Nat Driver::valor(const NombreGremio &g) const
 Nat Driver::acuerdosPrevios(const NombreGremio &g) const
 {
 	if(puenteNombreId.Definido(g)){
-		nat idG = puenteNombreId.Significado(g);
+		Nat idG = puenteNombreId.Significado(g);
 		Gremio gremio = sistema->obtenerGremio(idG);
 		return temporada->obtenerCantAcuerdosPrevios(gremio);
 	}else{

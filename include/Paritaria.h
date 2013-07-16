@@ -1,21 +1,22 @@
-#include "Gremio.h"
 #ifndef PARITARIA_H_
 #define PARITARIA_H_
+
+#include "Gremio.h"
 
 class Paritaria {
 public:
 	Paritaria();
-	Paritaria(const Gremio& gr, const nat piso, const nat tope);
+	Paritaria(const Gremio& gr, const Nat piso, const Nat tope);
 	Paritaria(const Paritaria& otra);
 	Gremio& obtenerGremio();
-	nat obtenerPiso() const;
-	nat obtenerTope() const;
+	Nat obtenerPiso() const;
+	Nat obtenerTope() const;
 	~Paritaria();
 	bool operator !=(const Paritaria &p) const;
 private:
 	Gremio gremio;
-	nat piso;
-	nat tope;
+	Nat piso;
+	Nat tope;
 };
 
 #endif /* PARITARIA_H_ */

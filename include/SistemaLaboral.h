@@ -7,23 +7,23 @@
 class SistemaLaboral {
 public:
 	SistemaLaboral();
-	nat agregarGremio(const Conj<empresa>& es, const nat cantAfiliados);
-	void aliarGremios(const nat idGr1, const nat idGr2);
-	Conj<nat> obtenerAliados(const nat idGremio) const;
+	Nat agregarGremio(const Conj<Empresa>& es, const Nat cantAfiliados);
+	void aliarGremios(const Nat idGr1, const Nat idGr2);
+	Conj<Nat> obtenerAliados(const Nat idGremio) const;
 	Conj<Gremio> obtenerGremios() const;
-	nat obtenerCantidadGrupos() const;
+	Nat obtenerCantidadGrupos() const;
 	~SistemaLaboral();
 
 	//agregados por driver
-	void agregarEmpresa(const nat &idG, const Empresa &e);
-	Conj<empresa>& obtenerEmpresas(const nat &idG);
-	Gremio obtenerGremio(nat idG);
+	void agregarEmpresa(const Nat &idG, const Empresa &e);
+	Conj<Empresa>& obtenerEmpresas(const Nat &idG);
+	Gremio obtenerGremio(Nat idG);
 private:
 	//atributos
 	Vector<Gremio> sl;
 
 	//metodos
-	nat maximoIdGrupo() const;
+	Nat maximoIdGrupo() const;
 };
 
 #endif /* SISTEMALABORAL_H_ */
