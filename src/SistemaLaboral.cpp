@@ -22,7 +22,6 @@ Nat SistemaLaboral::agregarGremio(const Conj<Empresa> &es, const Nat cantAfiliad
     Gremio nuevoGremio(es, cantAfiliados);
     nuevoGremio.guardarIdGremio(idGremio);
     nuevoGremio.guardarIdGrupo(idGrupo);
-    if(SHOW_DEBUG_MESSAGES) std::cout << "ID Grupo fue: " << idGrupo << std::endl;
     sl.AgregarAtras(nuevoGremio);
 
     return idGremio;
