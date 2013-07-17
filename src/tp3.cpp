@@ -183,9 +183,9 @@ void nuestroTestAcuerdosYReAbrir()
 	d.abrirParitaria("Gremio6", 61, 68);
 	d.cerrarAcuerdo("Gremio6", 66);
 	ASSERT_EQ(d.acuerdosPrevios("Gremio6"), 2);
-	//ASSERT_EQ(d.valor("Gremio6"), 66);
+	ASSERT_EQ(d.valor("Gremio6"), 66);
 	ASSERT_EQ(d.paritarias().Cardinal(),5);
-	ASSERT_EQ(d.acuerdos().Cardinal(),3);
+	ASSERT_EQ(d.acuerdos().Cardinal(), 2);
 }
 
 int main()
