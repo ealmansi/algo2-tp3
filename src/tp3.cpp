@@ -167,9 +167,11 @@ void nuestroTestAcuerdosYReAbrir()
 	Driver d;
 	inicializarMuchosGremiosYAliarVarios(d);
 	d.iniciar();
+		if(SHOW_DEBUG_MESSAGES) cout << "Test hago paritaria de gremio 6 con 2 valores y assert de los valores" << endl;
 	d.abrirParitaria("Gremio6", 60, 69);
 	ASSERT_EQ(d.piso("Gremio6"), 60);
 	ASSERT_EQ(d.tope("Gremio6"), 69);
+		if(SHOW_DEBUG_MESSAGES) cout << "Test hago paritarias gremio 1,3,4,5,7,8 y assert en cardinal de paritarias" << endl;
 	d.abrirParitaria("Gremio1", 10, 19);
 	d.abrirParitaria("Gremio3", 30, 39);
 	d.abrirParitaria("Gremio4", 40, 49);
@@ -177,6 +179,7 @@ void nuestroTestAcuerdosYReAbrir()
 	d.abrirParitaria("Gremio7", 70, 79);
 	d.abrirParitaria("Gremio8", 80, 89);
 	ASSERT_EQ(d.paritarias().Cardinal(),7);
+		if(SHOW_DEBUG_MESSAGES) cout << "Test Cierro acuerdo en gremio 7,8,6, abro una nueva paritaria para gremio 6 y hago un nuevo acuerdo, y again, assert de: acuerdos previos, valor, cardinal paritarias y acuerdos" << endl;
 	d.cerrarAcuerdo("Gremio7", 72);
 	d.cerrarAcuerdo("Gremio8", 82);
 	d.cerrarAcuerdo("Gremio6", 65);
