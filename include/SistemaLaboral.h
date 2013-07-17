@@ -16,7 +16,6 @@ public:
 
 	//agregados por driver
 	void agregarEmpresa(const Nat &idG, const Empresa &e);
-	Conj<Empresa>& obtenerEmpresas(const Nat &idG);
 	Gremio obtenerGremio(Nat idG);
 private:
 	//atributos

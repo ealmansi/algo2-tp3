@@ -64,15 +64,8 @@ Conj<Empresa> Driver::empresas(const NombreGremio &g) const
         TERMINAR_CON_ERROR(GREMIO_INEXISTENTE(g));
 
     Nat idG = puenteNombreId.Significado(g);
-
-    Conj<Empresa> ret;
-    Conj<Empresa>::Iterador it = sistema->obtenerEmpresas(idG).CrearIt();
-    while (it.HaySiguiente())
-    {
-        ret.Agregar(it.Siguiente());
-        it.Avanzar();
-    }
-
+	Gremio gr = sistema->obtenerGremio(idG);
+    Conj<Empresa> ret = gr.obtenerEmpresas();
     return ret;
 }
 
@@ -212,4 +205,30 @@ Nat Driver::acuerdosPrevios(const NombreGremio &g) const
     Gremio gremio = sistema->obtenerGremio(idG);
 
     return temporada->obtenerCantAcuerdosPrevios(gremio);
+}
+
+Nat Driver::cantAfiliados(const NombreGremio& g) const {
+	if (!puenteNombreId.Definido(g))
+	        TERMINAR_CON_ERROR(GREMIO_INEXISTENTE(g));
+
+	Nat idG = puenteNombreId.Significado(g);
+
+	Gremio gremio = sistema->obtenerGremio(idG);
+
+	return gremio.obtenerCantAfiliados();
+}
+
+Conj<NombreGremio> Driver::gremios() const {
+	Conj<NombreGremio> res;
+	Conj<Gremio> gremiosSistema = sistema->obtenerGremios();
+	Conj<Gremio>::Iterador it = gremiosSistema.CrearIt();
+	while(it.HaySiguiente()){
+		res.AgregarRapido(puenteIdNombre.Significado(it.Siguiente().obtenerIdGremio()));
+		it.Avanzar();
+	}
+	return res;
+}
+
+Nat Driver::obtenerCantidadGruposDeAliados() const{
+	return sistema->obtenerCantidadGrupos();
 }

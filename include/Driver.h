@@ -37,7 +37,7 @@ public:
     Nat cantAfiliados(const NombreGremio& g) const;
     Conj<Empresa> empresas(const NombreGremio& g) const;
     Conj<NombreGremio> aliados(const NombreGremio& g) const;
-    Conj<NombreGremio> gremios(const NombreGremio& g) const;
+    Conj<NombreGremio> gremios() const;
 
     ///////////////////////////////////////////////////////////////
     /// Temporada
@@ -63,6 +63,8 @@ public:
     Nat valor (const NombreGremio& g) const;
     Nat acuerdosPrevios (const NombreGremio& g) const;
 
+    //agrego funciones para tests (Silvio)
+    Nat obtenerCantidadGruposDeAliados() const;
 private:
     // Deshabilitamos copia y asignacion
     Driver(const Driver& otro);

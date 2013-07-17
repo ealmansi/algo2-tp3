@@ -1,7 +1,8 @@
 #include "../include/SistemaLaboral.h"
+#include <iostream>
 
 #define     MIN(a,b)    (((a) < (b))?((a)):((b)))
-#define     MAX(a,b)    (((a) < (b))?((a)):((b)))
+#define     MAX(a,b)    (((a) > (b))?((a)):((b)))
 
 SistemaLaboral::SistemaLaboral()
 {
@@ -21,15 +22,10 @@ Nat SistemaLaboral::agregarGremio(const Conj<Empresa> &es, const Nat cantAfiliad
     Gremio nuevoGremio(es, cantAfiliados);
     nuevoGremio.guardarIdGremio(idGremio);
     nuevoGremio.guardarIdGrupo(idGrupo);
-
+    if(SHOW_DEBUG_MESSAGES) std::cout << "ID Grupo fue: " << idGrupo << std::endl;
     sl.AgregarAtras(nuevoGremio);
 
     return idGremio;
-}
-
-Conj<Empresa> &SistemaLaboral::obtenerEmpresas(const Nat &idG)
-{
-    return this->sl[idG].obtenerEmpresas();
 }
 
 Gremio SistemaLaboral::obtenerGremio(Nat idG)
