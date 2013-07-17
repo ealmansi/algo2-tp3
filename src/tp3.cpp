@@ -180,7 +180,7 @@ void nuestroTestAcuerdosYReAbrir()
 	d.cerrarAcuerdo("Gremio7", 72);
 	d.cerrarAcuerdo("Gremio8", 82);
 	d.cerrarAcuerdo("Gremio6", 65);
-	//d.abrirParitaria("Gremio6", 61, 68);
+	d.abrirParitaria("Gremio6", 61, 68);
 	d.cerrarAcuerdo("Gremio6", 66);
 	ASSERT_EQ(d.acuerdosPrevios("Gremio6"), 2);
 	//ASSERT_EQ(d.valor("Gremio6"), 66);

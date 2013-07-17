@@ -47,9 +47,10 @@ void Temporada::cerrarAcuerdo(const Gremio gr, const Nat porcentaje)
     {
         agregarParitaria(it.Siguiente().obtenerParitaria());
         it.EliminarSiguiente();
+        //TODO ver que pasa si borramos el ultimo , esto no vuela sangrientamente porque no vale HaySiguiente? SI. Fixed con if.
         if (it.HaySiguiente()) //agregue esto por las moscas. si borro el ultimo nos vimos en disney basicamente, no?(avanzar tiene assert hay siguiente, ver impl soporte)
         {
-            it.Avanzar();//TODO ver que pasa si borramos el ultimo , esto no vuela sangrientamente porque no vale HaySiguiente? SI. Fixed con if.
+            it.Avanzar();
         }
     }
     Paritaria pa;
@@ -84,14 +85,14 @@ Lista<Acuerdo> &Temporada::obtenerAcuerdosDeAliados(const Gremio &gr)
 bool Temporada::enParitarias(const Gremio gr) const
 {
     Conj<Paritaria>::const_Iterador it = this->paritariasAbiertas.CrearIt();
-    Paritaria pa = it.Siguiente();
-    while ((it.HaySiguiente()) && (pa.obtenerGremio().obtenerIdGremio() != gr.obtenerIdGremio()))
+    bool flag = false;
+    while ((it.HaySiguiente()) && (!flag))
     {
-        it.Avanzar();
-        pa = it.Siguiente();
+        Paritaria pa = it.Siguiente();
+    	flag = (pa.obtenerGremio().obtenerIdGremio() == gr.obtenerIdGremio());
+		it.Avanzar();
     }
-
-    return it.HaySiguiente();
+    return flag;
 }
 
 
@@ -151,14 +152,20 @@ Nat Temporada::trabajadoresNegociando() const
 void Temporada::removerParitaria(const Gremio &gr, Paritaria &res)
 {
     Conj<Paritaria>::Iterador it = this->paritariasAbiertas.CrearIt();
-    Paritaria pa = it.Siguiente();
-    while (pa.obtenerGremio().obtenerIdGremio() != gr.obtenerIdGremio())
-    {
-        it.Avanzar();
-        pa = it.Siguiente();
+    bool flag = false;
+    while( (it.HaySiguiente()) && (!flag) ){
+    	Paritaria prox = it.Siguiente();
+    	flag = prox.obtenerGremio().obtenerIdGremio() == gr.obtenerIdGremio();
+    	if(flag){//encontre el elemento, lo borro y si hay siguiente avanzo, al borrarlo puede no valer mas haySiguiente, flag va a ser true y corta el ciclo
+    		res = it.Siguiente();
+    		it.EliminarSiguiente();
+    		if(it.HaySiguiente()){
+    			it.Avanzar();//podria haber estado borrando el ultimo! por eso el if.
+    		}
+    	}else{//no es lo que busco, segui buscando ( valia la guarda , haySiguiente)
+    		it.Avanzar();
+    	}
     }
-    res = it.Siguiente();
-    it.EliminarSiguiente();
 }
 
 /**
@@ -209,7 +216,6 @@ Paritaria &Temporada::removerAcuerdo(const Gremio &gr)
     }
     Paritaria &res = it.Siguiente().obtenerParitaria();
     it.EliminarSiguiente();
-    
     return res;
 }
 

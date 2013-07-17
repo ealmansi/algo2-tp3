@@ -26,7 +26,7 @@ public:
 	Lista<Acuerdo>& obtenerAcuerdosDeAliados(const Gremio& gr);
 private:
 	//atributos
-	SistemaLaboral sistema;
+	SistemaLaboral& sistema;
 	Conj<Paritaria> paritariasAbiertas;
 	Vector<Lista<Acuerdo> > acuerdosPorGrupo;
 	Vector<Nat> cantAcuerdosPrevios;
