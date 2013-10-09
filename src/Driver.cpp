@@ -187,7 +187,7 @@ Nat Driver::valor(const NombreGremio &g) const
 
     Gremio gremio = sistema->obtenerGremio(idG);
     Lista<Acuerdo>::Iterador it = temporada->obtenerAcuerdosDeAliados(gremio).CrearIt();
-    while (it.Siguiente().obtenerGremio().obtenerIdGrupo() != idG)
+    while (it.Siguiente().obtenerGremio().obtenerIdGremio() != idG)
     {
         it.Avanzar();
     }
